@@ -36,6 +36,17 @@ public class SimpleMapEditor : MonoBehaviour
 
 	void Update()
 	{
+
+		if (Input.GetMouseButtonDown(2) && !EventSystem.current.IsPointerOverGameObject())
+        {
+			Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(inputRay, out hit))
+			{
+				grid.ShowToolTip(hit.point);
+			}
+		}
+
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			HandleInput();

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,9 @@ public class GridH : MonoBehaviour
 	[SerializeField] public Color touchedColor = Color.magenta;
 
 	[HideInInspector] public int testIndex;
+	private Item CurrentItem = new Item();
+	private Hint CurrentHint = new Hint();
+	private Pin CurrentPin = new Pin();
 
 	void Awake()
 	{
@@ -78,48 +82,72 @@ public class GridH : MonoBehaviour
 		tile.SetVisible(true);
 		tile.color = color;
 
-		Debug.Log(testIndex);
-
-		if (testIndex == 0)
-        {
-			tile.SetVisible(false);
-		}
-
 		hexMesh.Triangulate(tiles);
-        //switch (testindex)
-        //{
-        //    case 0:
-        //        item testitem = new item();
-        //        testitem.name = "bag of rocks";
-        //        testitem.value = 420;
-        //        testitem.tl = 6.9f;
-        //        testitem.quantity = 20;
-        //        tile.additem(testitem);
-        //        break;
-        //    case 1:
-        //        hint testhint = new hint();
-        //        testhint.title = "this is a test hint";
-        //        testhint.messgae = "pretty neat right";
-        //        tile.addhint(testhint);
-        //        break;
-        //    case 2:
-        //        pin testpin = new pin();
-        //        testpin.title = "pin test";
-        //        testpin.messgae = "working correctly";
-        //        tile.addpin(testpin);
-        //        break;
-        //    case 3:
-				
-        //        tile.clear();
-        //        break;
-        //}
+        switch (testIndex)
+        {
+            case 0:
+                tile.AddItem(CurrentItem);
+				Debug.Log(CurrentItem.Name);
+                break;
+            case 1:
+                tile.AddHint(CurrentHint);
+				Debug.Log(CurrentHint);
+				break;
+            case 2:
+                tile.AddPin(CurrentPin);
+				Debug.Log(CurrentPin);
+				break;
+            case 3:
+                tile.Clear();
+                break;
+        }
 
         //Debug.Log(JsonUtility.ToJson(tiles[0]));
 
         //Debug.Log("touched at " + tile.coordinates.ToString());
     }
 
-    public void EditCells(Vector3 position1, Vector3 position2, Color color)
+	public void SetName(Text name)
+    {
+		CurrentItem.Name = name.text;
+    }
+
+	public void SetValue(Text value)
+	{
+		CurrentItem.Value = Int32.Parse(value.text);
+	}
+
+	public void SetTL(Text tl)
+	{
+		CurrentItem.TL = float.Parse(tl.text);
+	}
+
+	public void SetQuantity(Text quantiti)
+	{
+		CurrentItem.Quantity = float.Parse(quantiti.text);
+	}
+
+	public void SetHintTitle(Text title)
+    {
+		CurrentHint.Title = title.text;
+	}
+
+	public void SetHintMessage(Text message)
+	{
+		CurrentHint.Messgae = message.text;
+	}
+
+	public void SetPinTitle(Text title)
+    {
+		CurrentPin.Title = title.text;
+	}
+
+	public void SetPinMessage(Text message)
+	{
+		CurrentPin.Messgae = message.text;
+	}
+
+	public void EditCells(Vector3 position1, Vector3 position2, Color color)
     {
 		position1 = transform.InverseTransformPoint(position1);
 		position2 = transform.InverseTransformPoint(position2);
@@ -139,6 +167,32 @@ public class GridH : MonoBehaviour
             }
         }
 
+	}
+
+	public void ShowToolTip(Vector3 position)
+    {
+		position = transform.InverseTransformPoint(position);
+		Coordnaites coords = Coordnaites.FromPosition(position);
+
+		int index = coords.X + coords.Z * width + coords.Z / 2;
+
+		Debug.Log("//////////// Items //////////");
+		foreach(Item item in tiles[index].GetItems())
+        {
+			Debug.Log(item.Name);
+        }
+
+		Debug.Log("//////////// Hints //////////");
+		foreach (Hint hint in tiles[index].GetHints())
+		{
+			Debug.Log(hint.Title);
+		}
+
+		Debug.Log("//////////// Pins //////////");
+		foreach (Pin pin in tiles[index].GetPins())
+		{
+			Debug.Log(pin.Title);
+		}
 	}
 
 	public string ToJsonString()
