@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] public Coordnaites coordinates;
     [SerializeField] public Color color;
+    public Color savedColor;
 
     private List<Effect> effects = new List<Effect>();
     private List<Pin> pins = new List<Pin>();
@@ -25,6 +26,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool isBlock = false;
     [SerializeField] private bool isVisible = true;
 
+    [SerializeField] public bool Multi = false;
     public bool isBlocked()
     {
         return isBlock;
@@ -73,6 +75,16 @@ public class Tile : MonoBehaviour
     public List<Effect> GetEffects()
     {
         return effects;
+    }
+
+    public void AddOccupant(CharacterSheet charactersheet)
+    {
+        occupants.Add(charactersheet);
+    }
+
+    public void RemoveOccupant(CharacterSheet charactersheet)
+    {
+        occupants.Remove(charactersheet);
     }
 
     public void AddEffect(Effect effect)

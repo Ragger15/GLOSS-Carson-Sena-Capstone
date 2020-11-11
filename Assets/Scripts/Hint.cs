@@ -14,11 +14,21 @@ public class Hint
         set { title = value; }
     }
 
+    public void SetTitle(string ttle)
+    {
+        Title = ttle;
+    }
+
     [SerializeField] private string message;
 
     public string Messgae
     {
         get { return message; }
         set { message = value; }
+    }
+
+    public void SetMessage(string mssage)
+    {
+        message = mssage;
     }
 }

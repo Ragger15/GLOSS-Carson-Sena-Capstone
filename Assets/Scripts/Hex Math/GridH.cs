@@ -66,47 +66,6 @@ public class GridH : MonoBehaviour
     {
         hexMesh.Triangulate(tiles);
     }
-
-	public void EditCell(Vector3 position, Color color)
-	{
-		position = transform.InverseTransformPoint(position);
-		Coordnaites coords = Coordnaites.FromPosition(position);
-
-		int index = coords.X + coords.Z * width + coords.Z / 2;
-
-		EditCell(tiles[index], color);
-	}
-
-	public void EditCell(Tile tile, Color color)
-	{
-		tile.SetVisible(true);
-		tile.color = color;
-
-		hexMesh.Triangulate(tiles);
-        switch (testIndex)
-        {
-            case 0:
-                tile.AddItem(CurrentItem);
-				Debug.Log(CurrentItem.Name);
-                break;
-            case 1:
-                tile.AddHint(CurrentHint);
-				Debug.Log(CurrentHint);
-				break;
-            case 2:
-                tile.AddPin(CurrentPin);
-				Debug.Log(CurrentPin);
-				break;
-            case 3:
-                tile.Clear();
-                break;
-        }
-
-        //Debug.Log(JsonUtility.ToJson(tiles[0]));
-
-        //Debug.Log("touched at " + tile.coordinates.ToString());
-    }
-
 	public void SetName(Text name)
     {
 		CurrentItem.Name = name.text;
@@ -145,28 +104,6 @@ public class GridH : MonoBehaviour
 	public void SetPinMessage(Text message)
 	{
 		CurrentPin.Messgae = message.text;
-	}
-
-	public void EditCells(Vector3 position1, Vector3 position2, Color color)
-    {
-		position1 = transform.InverseTransformPoint(position1);
-		position2 = transform.InverseTransformPoint(position2);
-		Coordnaites coords1 = Coordnaites.FromPosition(position1);
-		Coordnaites coords2 = Coordnaites.FromPosition(position2);
-
-		int highX = (coords1.X < coords2.X ? coords2.X : coords1.X);
-		int lowX = (coords1.X < coords2.X ? coords1.X : coords2.X);
-		int highZ = (coords1.Z < coords2.Z ? coords2.Z : coords1.Z);
-		int lowZ = (coords1.Z < coords2.Z ? coords1.Z : coords2.Z);
-
-		foreach (Tile tile in tiles)
-        {
-			if (tile.coordinates.X <= highX && tile.coordinates.X >= lowX && tile.coordinates.Z <= highZ && tile.coordinates.Z >= lowZ )
-            {
-				EditCell(tile, color);
-            }
-        }
-
 	}
 
 	public void ShowToolTip(Vector3 position)

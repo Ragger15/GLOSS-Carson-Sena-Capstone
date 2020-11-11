@@ -14,6 +14,11 @@ public class Pin
         set { title = value; }
     }
 
+    public void SetTitle(string ttle)
+    {
+        Title = ttle;
+    }
+
     [SerializeField] private string message;
 
     public string Messgae
@@ -22,5 +27,8 @@ public class Pin
         set { message = value; }
     }
 
-
+    public void SetMessage(string mssage)
+    {
+        message = mssage;
+    }
 }

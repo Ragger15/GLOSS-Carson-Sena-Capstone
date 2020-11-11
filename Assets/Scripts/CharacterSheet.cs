@@ -13,4 +13,22 @@ public class CharacterSheet
         get { return name; }
         set { name = value; }
     }
+
+    public void SetName(string nme)
+    {
+        Name = nme;
+    }
+
+    [SerializeField] private float speed;
+
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+
+    public void SetSpeed(string spd)
+    {
+        Speed = float.Parse(spd);
+    }
 }
