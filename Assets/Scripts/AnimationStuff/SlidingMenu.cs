@@ -6,6 +6,7 @@ public class SlidingMenu : MonoBehaviour
 {
     [SerializeField] public GameObject MenuPanel;
     [SerializeField] public int prevClicker;
+    [SerializeField] public ColorPicker cp;
 
     public void SlideMenu(int clicker)
     {
@@ -18,10 +19,12 @@ public class SlidingMenu : MonoBehaviour
                 if (open)
                 {
                     animator.SetBool("isOpen", !open);
+                    cp.enabled = !cp.enabled;
                 }
                 else if(prevClicker == clicker)
                 {
                     animator.SetBool("isOpen", !open);
+                    cp.enabled = !cp.enabled;
                 }
                 prevClicker = clicker;
             }
