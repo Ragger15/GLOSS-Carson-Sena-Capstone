@@ -23,9 +23,6 @@ public class GridH : MonoBehaviour
 	[SerializeField] public Color touchedColor = Color.magenta;
 
 	[HideInInspector] public int testIndex;
-	private Item CurrentItem = new Item();
-	private Hint CurrentHint = new Hint();
-	private Pin CurrentPin = new Pin();
 
 	void Awake()
 	{
@@ -66,45 +63,6 @@ public class GridH : MonoBehaviour
     {
         hexMesh.Triangulate(tiles);
     }
-	public void SetName(Text name)
-    {
-		CurrentItem.Name = name.text;
-    }
-
-	public void SetValue(Text value)
-	{
-		CurrentItem.Value = Int32.Parse(value.text);
-	}
-
-	public void SetTL(Text tl)
-	{
-		CurrentItem.TL = float.Parse(tl.text);
-	}
-
-	public void SetQuantity(Text quantiti)
-	{
-		CurrentItem.Quantity = float.Parse(quantiti.text);
-	}
-
-	public void SetHintTitle(Text title)
-    {
-		CurrentHint.Title = title.text;
-	}
-
-	public void SetHintMessage(Text message)
-	{
-		CurrentHint.Messgae = message.text;
-	}
-
-	public void SetPinTitle(Text title)
-    {
-		CurrentPin.Title = title.text;
-	}
-
-	public void SetPinMessage(Text message)
-	{
-		CurrentPin.Messgae = message.text;
-	}
 
 	public void ShowToolTip(Vector3 position)
     {
@@ -131,79 +89,5 @@ public class GridH : MonoBehaviour
 			Debug.Log(pin.Title);
 		}
 	}
-
-	public string ToJsonString()
-    {
-		string json = "{\"tiles\":["; //"{\"width\":" + width + ",\"height\":" + height + ",\"tiles\":[";
-
-		for (int i = 0; i < tiles.Length; i++)
-        {
-			tiles[i].UpdateForSave();
-			json += JsonUtility.ToJson(tiles[i]);
-			if (i + 1 < tiles.Length)
-            {
-				json += ",";
-            }
-            else
-            {
-				json += "]";
-			}
-		}
-
-		json += "}";
-
-		return json;
-    }
-
-	public void Load(string json)
-    {
-		string tempString = json.Substring(10);
-		List<int> coords = new List<int>();
-		int brackets = 0;
-		bool instring = false;
-
-		for (int i = 0; i < tempString.Length; i++)
-        {
-			if (brackets == 0 && tempString[i] != ',')
-            {
-				coords.Add(i);
-            }
-
-			if (tempString[i] == '{' && !instring)
-            {
-				brackets++;
-            }
-			else if (tempString[i] == '}' && !instring)
-            {
-				brackets--;
-			}
-			else if (tempString[i] == '\"')
-			{
-				instring = !instring;
-			}
-
-		}
-
-		Tile temp;
-
-		for (int i = 0; i < coords.Count - 1; i++)
-        {
-
-			if (i == 0)
-            {
-				Debug.Log(tempString.Substring(coords[i], coords[i + 1] - coords[i] - 1));
-				Debug.Log(JsonUtility.ToJson(tiles[i]));
-				temp = JsonUtility.FromJson<Tile>(tempString.Substring(coords[i], coords[i + 1] - coords[i] - 1));
-				tiles[i] = temp;
-
-			}
-            else
-            {
-				tiles[i] = JsonUtility.FromJson<Tile>(tempString.Substring(coords[i] + 2, coords[i + 1] - (coords[i] + 1)));
-			}
-			
-        }
-
-    }
 
 }

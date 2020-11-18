@@ -2693,6 +2693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MenuPanel: {fileID: 7204127297122963968}
   prevClicker: 0
+  cp: {fileID: 0}
 --- !u!114 &7204127297122963978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4343,6 +4344,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sliding tab (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723377752723792271, guid: cd7d3e7285c5b5b4c8e7a4c6990ee456,
+        type: 3}
+      propertyPath: m_Text
+      value: Characters
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7d3e7285c5b5b4c8e7a4c6990ee456, type: 3}

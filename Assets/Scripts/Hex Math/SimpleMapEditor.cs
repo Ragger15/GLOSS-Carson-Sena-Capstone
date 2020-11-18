@@ -32,8 +32,7 @@ public class SimpleMapEditor : MonoBehaviour
 	private int on = 0;
 	private bool swotch = true;
 	private bool anitLine = false;
-	private bool moving = false;
-	private CharacterSheet movingBoi;
+	//private CharacterSheet movingBoi;
 	private List<Tile> SelectedTiles = new List<Tile>();
 
 	private Vector3[] corners = new Vector3[4];
@@ -206,15 +205,6 @@ public class SimpleMapEditor : MonoBehaviour
 		if (Physics.Raycast(inputRay, out hit))
 		{
 			Coordnaites coords = Coordnaites.FromPosition(hit.point);
-			if(moving && Mathf.Sqrt(
-				Mathf.Pow(coords.X - SelectedTile.coordinates.X, 2) +
-				Mathf.Pow(coords.Y - SelectedTile.coordinates.Y, 2) +
-				Mathf.Pow(coords.Z - SelectedTile.coordinates.Z, 2)) <= movingBoi.Speed)
-            {
-				SelectedTile.RemoveOccupant(movingBoi);
-				grid.tiles[coords.X + coords.Z * grid.width + coords.Z / 2].AddOccupant(movingBoi);
-				moving = false;
-			}
 			SelectedTile = grid.tiles[coords.X + coords.Z * grid.width + coords.Z / 2];
 			SelectedTile.savedColor = SelectedTile.color;
 			SelectedTile.color = new Color(0, 0, 0);
@@ -315,11 +305,11 @@ public class SimpleMapEditor : MonoBehaviour
 		UpdateMenu();
 	}
 
-	public void Move()
-    {
-		movingBoi = SelectedTile.GetOccupants()[ActionMenu.GetComponentInChildren<Dropdown>().value];
-		moving = true;
-    }
+	//public void Move()
+ //   {
+	//	movingBoi = SelectedTile.GetOccupants()[ActionMenu.GetComponentInChildren<Dropdown>().value];
+	//	moving = true;
+ //   }
 
 	public void UpdateMenu()
     {
@@ -458,25 +448,25 @@ public class SimpleMapEditor : MonoBehaviour
 					Destroy(child.gameObject);
 				}
 			}
-			int count = 0;
-			foreach (CharacterSheet characterSheet in SelectedTile.GetOccupants())
-			{
-				GameObject newpannel = Instantiate(CharacterMenuPrefab, CharacterMenu.transform);
-				List<InputField> feilds = newpannel.GetComponentsInChildren<InputField>().ToList<InputField>();
-				feilds[0].text = characterSheet.Name;
-				feilds[1].text = $"{characterSheet.Speed}";
-				feilds[0].onEndEdit.AddListener(characterSheet.SetName);
-				feilds[1].onEndEdit.AddListener(characterSheet.SetSpeed);
-				if (SelectedTile.Multi)
-				{
-					foreach (Tile tile in SelectedTiles)
-					{
-						feilds[0].onEndEdit.AddListener(tile.GetOccupants()[tile.GetOccupants().Count - ((SelectedTile.GetOccupants().Count - count))].SetName);
-						feilds[1].onEndEdit.AddListener(tile.GetOccupants()[tile.GetOccupants().Count - ((SelectedTile.GetOccupants().Count - count))].SetSpeed);
-					}
-				}
-				count++;
-			}
+			//int count = 0;
+			//foreach (CharacterSheet characterSheet in SelectedTile.GetOccupants())
+			//{
+			//	GameObject newpannel = Instantiate(CharacterMenuPrefab, CharacterMenu.transform);
+			//	List<InputField> feilds = newpannel.GetComponentsInChildren<InputField>().ToList<InputField>();
+			//	feilds[0].text = characterSheet.Name;
+			//	feilds[1].text = $"{characterSheet.Speed}";
+			//	feilds[0].onEndEdit.AddListener(characterSheet.SetName);
+			//	feilds[1].onEndEdit.AddListener(characterSheet.SetSpeed);
+			//	if (SelectedTile.Multi)
+			//	{
+			//		foreach (Tile tile in SelectedTiles)
+			//		{
+			//			feilds[0].onEndEdit.AddListener(tile.GetOccupants()[tile.GetOccupants().Count - ((SelectedTile.GetOccupants().Count - count))].SetName);
+			//			feilds[1].onEndEdit.AddListener(tile.GetOccupants()[tile.GetOccupants().Count - ((SelectedTile.GetOccupants().Count - count))].SetSpeed);
+			//		}
+			//	}
+			//	count++;
+			//}
 
 			List<Text> texts = CharacterMenu.GetComponentsInChildren<Text>().ToList<Text>();
 			List<Text> justrealtexts = new List<Text>();
@@ -507,33 +497,6 @@ public class SimpleMapEditor : MonoBehaviour
 	{
 		grid.testIndex = index;
 		activeColor = colors[index];
-	}
-
-	public void Save()
-	{
-		string path = "C:/Users/carso/Maps/test.map";
-		string jsonString = grid.ToJsonString();
-		Debug.Log(jsonString);
-
-		System.IO.File.WriteAllText(path, jsonString);
-
-	}
-
-	public void Load()
-	{
-		string path = "C:/Users/carso/Maps/test.map";
-		string json = System.IO.File.ReadAllText(path);
-		Debug.Log(json);
-		Debug.Log(grid.tiles[0].color);
-
-		grid.Load(json);
-
-		//Tile[] hopeful = new Tile[36];
-
-		//JsonUtility.FromJsonOverwrite(json, grid.tiles);
-
-		Debug.Log(grid.tiles[0].color);
-
 	}
 
 }

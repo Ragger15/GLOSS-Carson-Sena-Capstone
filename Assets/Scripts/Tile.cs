@@ -16,12 +16,6 @@ public class Tile : MonoBehaviour
     private List<Hint> hints = new List<Hint>();
     private List<CharacterSheet> occupants = new List<CharacterSheet>();
 
-    [SerializeField] private Effect[] effectsArray;
-    [SerializeField] private Pin[] pinsArray;
-    [SerializeField] private Item[] itemsArray;
-    [SerializeField] private Hint[] hintsArray;
-    [SerializeField] private CharacterSheet[] occupantsArray;
-
     [SerializeField] private bool isReveialed = false;
     [SerializeField] private bool isBlock = false;
     [SerializeField] private bool isVisible = true;
@@ -202,71 +196,4 @@ public class Tile : MonoBehaviour
     {
         occupants.Remove(entity);
     }
-
-    public void UpdateForSave()
-    {
-        effectsArray = effects.ToArray();
-        pinsArray = pins.ToArray();
-        itemsArray = items.ToArray();
-        hintsArray = hints.ToArray();
-        occupantsArray = occupants.ToArray();
-
-    }
-
-    //public string ToJsonString()
-    //{
-    //    string json = "{\"coordinates\":" + coordinates + ",\"color\":" + color + ",\"pinsArray\":[";
-
-    //    for (int i = 0; i < pinsArray.Length; i++)
-    //    {
-    //        json += JsonUtility.ToJson(pinsArray[i]);
-
-    //        if (i + 1 < pinsArray.Length)
-    //        {
-    //            json += ",";
-    //        }
-    //        else
-    //        {
-    //            json += "],\"itemsArray\":[";
-    //        }
-
-    //    }
-
-    //    for (int i = 0; i < itemsArray.Length; i++)
-    //    {
-    //        json += JsonUtility.ToJson(itemsArray[i]);
-
-    //        if (i + 1 < itemsArray.Length)
-    //        {
-    //            json += ",";
-    //        }
-    //        else
-    //        {
-    //            json += "],\"hintsArray\":[";
-    //        }
-
-    //    }
-
-    //    for (int i = 0; i < hintsArray.Length; i++)
-    //    {
-    //        json += JsonUtility.ToJson(hintsArray[i]);
-    //        if (i + 1 < hintsArray.Length)
-    //        {
-    //            json += ",";
-    //        }
-    //        else
-    //        {
-    //            json += "]";
-    //        }
-
-    //    }
-    //    json += "}";
-
-    //    return json;
-    //}
-
-    //public static Tile FromJsonString(String json)
-    //{
-
-    //}
 }
