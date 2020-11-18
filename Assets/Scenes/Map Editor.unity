@@ -230,10 +230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 50
   height: 50
-  prefab: {fileID: 1151775546723589665, guid: be0e2433ac336ad41829a25505831f9d, type: 3}
   tiles: []
-  textPrefab: {fileID: 7395734754491906625, guid: a6eada01836fe1f4abde09c032f03163,
-    type: 3}
+  prefab: {fileID: 1151775546723589665, guid: be0e2433ac336ad41829a25505831f9d, type: 3}
   canvas: {fileID: 0}
   hexMesh: {fileID: 0}
   defaultColor: {r: 1, g: 1, b: 1, a: 0}
@@ -255,6 +253,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &608158450 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1041200171110211818, guid: b8a5750efd9f3b54983aebf437975b64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124330881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d486d41c2073aaf4d8051b949599b207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &634258248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2710466361009789596, guid: b8a5750efd9f3b54983aebf437975b64,
@@ -569,6 +579,11 @@ PrefabInstance:
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2365560584668346232, guid: b8a5750efd9f3b54983aebf437975b64,
+        type: 3}
+      propertyPath: tabControler
+      value: 
+      objectReference: {fileID: 1853827840}
     - target: {fileID: 3001183105475384244, guid: b8a5750efd9f3b54983aebf437975b64,
         type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1014,6 +1029,11 @@ PrefabInstance:
       propertyPath: prevClicker
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7204127297122963980, guid: b8a5750efd9f3b54983aebf437975b64,
+        type: 3}
+      propertyPath: cp
+      value: 
+      objectReference: {fileID: 608158450}
     - target: {fileID: 7204127297318951966, guid: b8a5750efd9f3b54983aebf437975b64,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1463,6 +1483,9 @@ MonoBehaviour:
   PinMenuPrefab: {fileID: 836708368691249310, guid: a148fe0c821cb7349b6c33f9baccdf7e,
     type: 3}
   PinMenu: {fileID: 634258248}
+  CharacterMenuPrefab: {fileID: 0}
+  CharacterMenu: {fileID: 0}
+  ActionMenu: {fileID: 0}
   MultiTile: {fileID: 1151775546723589665, guid: 481e0c5e8f4f617459542ac69e7f5ab8,
     type: 3}
   colors:
@@ -1471,6 +1494,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 0}
   - {r: 1, g: 1, b: 1, a: 0}
   grid: {fileID: 200913059}
+  SelectedTile: {fileID: 0}
   LR: {fileID: 1664401247}
 --- !u!114 &1664401243
 MonoBehaviour:
@@ -1651,6 +1675,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 1
+--- !u!114 &1853827840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7204127297122963978, guid: b8a5750efd9f3b54983aebf437975b64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124330881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7b014c67ac0e547967f7887cda2ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2114386786 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7204127297122963980, guid: b8a5750efd9f3b54983aebf437975b64,

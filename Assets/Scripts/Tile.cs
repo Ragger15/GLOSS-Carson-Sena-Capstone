@@ -10,15 +10,15 @@ public class Tile : MonoBehaviour
     [SerializeField] public Color color;
     public Color savedColor;
 
-    private List<Effect> effects = new List<Effect>();
-    private List<Pin> pins = new List<Pin>();
-    private List<Item> items = new List<Item>();
-    private List<Hint> hints = new List<Hint>();
-    private List<CharacterSheet> occupants = new List<CharacterSheet>();
+    public List<Effect> effects = new List<Effect>();
+    public List<Pin> pins = new List<Pin>();
+    public List<Item> items = new List<Item>();
+    public List<Hint> hints = new List<Hint>();
+    public List<CharacterSheet> occupants = new List<CharacterSheet>();
 
-    [SerializeField] private bool isReveialed = false;
-    [SerializeField] private bool isBlock = false;
-    [SerializeField] private bool isVisible = true;
+    [SerializeField] public bool isReveialed = false;
+    [SerializeField] public bool isBlock = false;
+    [SerializeField] public bool isVisible = true;
 
     [SerializeField] public bool Multi = false;
     public bool isBlocked()
@@ -69,6 +69,28 @@ public class Tile : MonoBehaviour
     public List<Effect> GetEffects()
     {
         return effects;
+    }
+
+    public void Load(TileSaveData saveData)
+    {
+        color = saveData.Color;
+        savedColor = color;
+        effects = EffectTracker.IDStoEffects(saveData.EffectIDs);
+        pins = saveData.Pins;
+        items = new List<Item>();
+        foreach (ItemSaveData isd in saveData.Items)
+        {
+            items.Add(new Item(isd));
+        }
+        hints = saveData.Hints;
+        occupants = new List<CharacterSheet>();
+        foreach (CharacterSaveData csd in saveData.Occupants)
+        {
+            occupants.Add(new CharacterSheet(csd));
+        }
+        isReveialed = saveData.isReveialed;
+        isBlock = saveData.isBlock;
+        isVisible = saveData.isVisible;
     }
 
     public void AddOccupant(CharacterSheet charactersheet)
@@ -196,4 +218,46 @@ public class Tile : MonoBehaviour
     {
         occupants.Remove(entity);
     }
+
+    public List<int> GetEffectIds()
+    {
+        List<int> ids = new List<int>();
+
+        foreach (Effect effect in effects)
+        {
+            ids.Add(effect.ID);
+        }
+
+        return ids;
+    }
+
+    public List<ItemSaveData> GetItemSaveData()
+    {
+        List<ItemSaveData> ids = new List<ItemSaveData>();
+
+        foreach (Item item in items)
+        {
+            ids.Add(item.GetSaveData());
+        }
+
+        return ids;
+    }
+
+    public List<CharacterSaveData> GetOccupantSaveData()
+    {
+        List<CharacterSaveData> ids = new List<CharacterSaveData>();
+
+        foreach (CharacterSheet sheet in occupants)
+        {
+            ids.Add(sheet.GetSaveData());
+        }
+
+        return ids;
+    }
+
+    public TileSaveData GetSaveData()
+    {
+        return new TileSaveData(this);
+    }
+
 }

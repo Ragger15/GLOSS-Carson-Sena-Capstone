@@ -6,10 +6,15 @@ public class TestScript : MonoBehaviour
 {
 
     public CharacterSheet sheet { get; set; }
+    [SerializeField] public GridH grid;
 
     void Start()
     {
         sheet = new CharacterSheet();
+        //foreach(Tile tile in grid.tiles)
+        //{
+        //    tile.color = Color.blue;
+        //}
         //sheet.Name = "Wendel";
         //Advantage ad = new Advantage();
         //ad.Name = "+1 ST";
@@ -38,24 +43,37 @@ public class TestScript : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("////////////////////////New Sheet//////////////////////////////////////");
-            Debug.Log(sheet.Name);
-            Debug.Log(sheet.ST);
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    Debug.Log("////////////////////////New Sheet//////////////////////////////////////");
+        //    Debug.Log(sheet.Name);
+        //    Debug.Log(sheet.ST);
+        //}
         //if (Input.GetMouseButtonDown(0))
         //{
         //    string path = "C:/Users/Carson Sena/Characters/test.json";
         //    string jsonString = JsonUtility.ToJson(sheet.GetSaveData());
         //    System.IO.File.WriteAllText(path, jsonString);
         //}
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    string path = "C:/Users/Carson Sena/Characters/test.json";
+        //    string jsonString = System.IO.File.ReadAllText(path);
+        //    CharacterSaveData data = JsonUtility.FromJson<CharacterSaveData>(jsonString);
+        //    sheet = new CharacterSheet(data);
+        //}
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    string path = "C:/Users/Carson Sena/Maps/test.json";
+        //    string jsonString = JsonUtility.ToJson(grid.GetSaveData());
+        //    System.IO.File.WriteAllText(path, jsonString);
+        //}
         if (Input.GetMouseButtonDown(0))
         {
-            string path = "C:/Users/Carson Sena/Characters/test.json";
+            string path = "C:/Users/Carson Sena/Maps/test.json";
             string jsonString = System.IO.File.ReadAllText(path);
-            CharacterSaveData data = JsonUtility.FromJson<CharacterSaveData>(jsonString);
-            sheet = new CharacterSheet(data);
+            GridSaveData data = JsonUtility.FromJson<GridSaveData>(jsonString);
+            grid.Load(data);
         }
     }
 }

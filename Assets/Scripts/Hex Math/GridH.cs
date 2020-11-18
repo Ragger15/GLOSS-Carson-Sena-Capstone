@@ -10,11 +10,12 @@ public class GridH : MonoBehaviour
 	[SerializeField] public int width = 10;
 	[SerializeField] public int height = 10;
 
-	[SerializeField] public Tile prefab;
-
 	[HideInInspector] public Tile[] tiles;
 
-	[SerializeField] public Text textPrefab;
+	[SerializeField] public Tile prefab;
+
+
+	//[SerializeField] public Text textPrefab;
 
 	[HideInInspector] public Canvas canvas;
 	[HideInInspector] public HexMesh hexMesh;
@@ -59,6 +60,18 @@ public class GridH : MonoBehaviour
 
 	}
 
+	public void Load(GridSaveData saveData)
+    {
+		if (height == saveData.height && width == saveData.width)
+        {
+			for(int i = 0; i < tiles.Length; i++)
+            {
+				tiles[i].Load(saveData.tiles[i]);
+            }
+        }
+		hexMesh.Triangulate(tiles);
+	}
+
     void Start()
     {
         hexMesh.Triangulate(tiles);
@@ -88,6 +101,23 @@ public class GridH : MonoBehaviour
 		{
 			Debug.Log(pin.Title);
 		}
+	}
+
+	public List<TileSaveData> GetTileSaveData()
+	{
+		List<TileSaveData> tds = new List<TileSaveData>();
+
+		for(int i = 0; i < tiles.Length; i++)
+        {
+			tds.Add(tiles[i].GetSaveData());
+		}
+
+		return tds;
+	}
+
+	public GridSaveData GetSaveData()
+	{
+		return new GridSaveData(this);
 	}
 
 }
