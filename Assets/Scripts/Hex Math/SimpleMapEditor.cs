@@ -19,6 +19,7 @@ public class SimpleMapEditor : MonoBehaviour
 	[SerializeField] public GameObject CharacterMenu;
 	[SerializeField] public GameObject ActionMenu;
 	[SerializeField] public Tile MultiTile;
+	[SerializeField] public Player player;
 	public Color[] colors;
 
 	public GridH grid;
@@ -280,6 +281,7 @@ public class SimpleMapEditor : MonoBehaviour
             }
         }
 		grid.hexMesh.Triangulate(grid.tiles);
+		player.Send(JsonUtility.ToJson(grid.GetSaveData()));
     }
 
 	public void GetColor(ColorPicker picker)
