@@ -132,13 +132,6 @@ public class CharacterSheet
         return GetMove() + dodgeMod;
     }
 
-    public int healthMod { get; set; } = 0;
-
-    public int GetHealth()
-    {
-        return HT + healthMod;
-    }
-
 
     public CharacterSheet(CharacterSaveData saveData)
     {
