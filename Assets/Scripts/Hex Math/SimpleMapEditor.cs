@@ -15,11 +15,7 @@ public class SimpleMapEditor : MonoBehaviour
 	[SerializeField] public GameObject HintMenu;
 	[SerializeField] public GameObject PinMenuPrefab;
 	[SerializeField] public GameObject PinMenu;
-	[SerializeField] public GameObject CharacterMenuPrefab;
-	[SerializeField] public GameObject CharacterMenu;
-	[SerializeField] public GameObject ActionMenu;
 	[SerializeField] public Tile MultiTile;
-	[SerializeField] public Player player;
 	public Color[] colors;
 
 	public GridH grid;
@@ -281,7 +277,6 @@ public class SimpleMapEditor : MonoBehaviour
             }
         }
 		grid.hexMesh.Triangulate(grid.tiles);
-		player.Send(JsonUtility.ToJson(grid.GetSaveData()));
     }
 
 	public void GetColor(ColorPicker picker)
@@ -443,13 +438,6 @@ public class SimpleMapEditor : MonoBehaviour
 
 		// character update
 		{
-			foreach (Transform child in CharacterMenu.transform)
-			{
-				if (child.gameObject.name != "Add Character Panel")
-				{
-					Destroy(child.gameObject);
-				}
-			}
 			//int count = 0;
 			//foreach (CharacterSheet characterSheet in SelectedTile.GetOccupants())
 			//{
@@ -469,29 +457,10 @@ public class SimpleMapEditor : MonoBehaviour
 			//	}
 			//	count++;
 			//}
-
-			List<Text> texts = CharacterMenu.GetComponentsInChildren<Text>().ToList<Text>();
-			List<Text> justrealtexts = new List<Text>();
-			foreach (Text text in texts)
-			{
-				if (text.name != "Text")
-				{
-					justrealtexts.Add(text);
-				}
-			}
 		}
 
         // action update
         {
-			Dropdown dropdown = ActionMenu.GetComponentInChildren<Dropdown>();
-			dropdown.ClearOptions();
-			List<Dropdown.OptionData> option = new List<Dropdown.OptionData>();
-			foreach (CharacterSheet charactersheet in SelectedTile.GetOccupants())
-            {
-				Dropdown.OptionData data = new Dropdown.OptionData(charactersheet.Name);
-				option.Add(data);
-			}
-			dropdown.AddOptions(option);
         }
 	}
 

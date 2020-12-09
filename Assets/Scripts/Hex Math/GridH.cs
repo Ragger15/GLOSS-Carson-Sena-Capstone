@@ -12,12 +12,11 @@ public class GridH : MonoBehaviour
 
 	[HideInInspector] public Tile[] tiles;
 
-	[SerializeField] public Tile prefab;
+    [SerializeField] private Tile prefab;
 
+    //[SerializeField] public Text textPrefab;
 
-	//[SerializeField] public Text textPrefab;
-
-	[HideInInspector] public Canvas canvas;
+    [HideInInspector] public Canvas canvas;
 	[HideInInspector] public HexMesh hexMesh;
 
 	[SerializeField] public Color defaultColor = Color.white;
@@ -25,13 +24,26 @@ public class GridH : MonoBehaviour
 
 	[HideInInspector] public int testIndex;
 
-	void Awake()
+    public Tile Prefab { get => prefab; set => prefab = value; }
+
+    void Awake()
 	{
 		canvas = GetComponentInChildren<Canvas>();
 		hexMesh = GetComponentInChildren<HexMesh>();
 		tiles = new Tile[height * width];
 
 		for(int z = 0, i = 0; z < height; z++) {
+			for (int x = 0; x < width; x++)
+			{
+				CreateCell(x, z, i++);
+			}
+		}
+	}
+
+	public void ManualCreate()
+    {
+		for (int z = 0, i = 0; z < height; z++)
+		{
 			for (int x = 0; x < width; x++)
 			{
 				CreateCell(x, z, i++);
@@ -46,7 +58,7 @@ public class GridH : MonoBehaviour
 		position.y = 0f;
 		position.z = z * (MathH.outerRadius * 1.5f);
 
-		Tile tile = tiles[i] = Instantiate<Tile>(prefab);
+		Tile tile = tiles[i] = Instantiate<Tile>(Prefab);
 		tile.transform.SetParent(transform, false);
 		tile.transform.localPosition = position;
 		tile.coordinates = Coordnaites.BadToGood(x, z);

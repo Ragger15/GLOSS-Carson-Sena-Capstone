@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1459734867102002081}
   - component: {fileID: 1459734867102002086}
-  - component: {fileID: 6463339566042549437}
-  - component: {fileID: 8101068510900371154}
   m_Layer: 0
   m_Name: Gid
   m_TagString: Untagged
@@ -56,37 +54,6 @@ MonoBehaviour:
   defaultColor: {r: 1, g: 1, b: 1, a: 0}
   touchedColor: {r: 1, g: 0, b: 1, a: 1}
   testIndex: 0
---- !u!114 &6463339566042549437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459734867102002087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &8101068510900371154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459734867102002087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e788c784c0b80d34aa72bad5d6234c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  playerGrid: {fileID: 1459734867102002086}
 --- !u!1 &1459734868354827905
 GameObject:
   m_ObjectHideFlags: 0
